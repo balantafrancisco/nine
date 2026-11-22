@@ -44,7 +44,18 @@ builder.Services.AddHttpClient<FlashscoreSource>(c =>
 // IMatchSource se resuelve a FlashscoreSource (ya tiene sus dependencias)
 builder.Services.AddScoped<IMatchSource>(sp => sp.GetRequiredService<FlashscoreSource>());
 
+// 1. Agregar CORS
+builder.Services.AddCors(options => {
+    options.AddDefaultPolicy(policy => {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+// 2. Usar CORS
+app.UseCors();
+
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDb>();
