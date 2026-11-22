@@ -3,6 +3,8 @@ using CornersApi.Analysis;
 using Microsoft.EntityFrameworkCore;
 using CornersApi.ApiFootball;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 var cs = builder.Configuration.GetConnectionString("Default")!;
 // ELIMINA O COMENTA ESTAS LÍNEAS:
@@ -10,7 +12,7 @@ var cs = builder.Configuration.GetConnectionString("Default")!;
 // builder.Services.AddDbContext<AppDb>(o => { if (useSqlServer) o.UseSqlServer(cs); else o.UseSqlite(cs); });
 
 // AGREGA ESTA LÍNEA PARA USAR POSTGRESQL:
-builder.Services.AddDbContext<AppDb>(o => o.UseNpgsql(cs));
+builder.Services.AddDbContext<AppDb>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<Store>();
 builder.Services.AddSingleton<SyncBackgroundService>();

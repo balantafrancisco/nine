@@ -74,7 +74,7 @@ A 2T U 2.5 1.40";
         { var o = ParseOdd(l); o.FixtureId = f.Id; db.Odds.Add(o); }
         db.SaveChanges();
         // Partido DEMO de hoy para ver la pantalla de análisis (usa el historial manual de arriba)
-        db.Games.Add(new Game { LeagueId = fra.Id, Season = "demo", ExternalId = "demo-tou-str", Date = DateTime.Today.AddHours(20), HomeTeamId = tou.Id, AwayTeamId = str.Id });
+        db.Games.Add(new Game { LeagueId = fra.Id, Season = "demo", ExternalId = "demo-tou-str", Date = DateTime.UtcNow.AddHours(20), HomeTeamId = tou.Id, AwayTeamId = str.Id });
         db.SaveChanges();
     }
 }
