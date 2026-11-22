@@ -310,13 +310,21 @@ function DetailView({ id, back }: { id: number; back: () => void }) {
 }
 
 function DataTab() {
-  const [leagues, setLeagues] = useState<{ code: string; name: string }[]>([]);
+  // 1. Quitamos la carga dinámica y ponemos las ligas fijas
+  const leagues = [
+    { code: 'FRA1', name: 'Ligue 1' },
+    { code: 'ENG1', name: 'Premier League' },
+    { code: 'ESP1', name: 'LaLiga' },
+    { code: 'ITA1', name: 'Serie A' },
+    { code: 'GER1', name: 'Bundesliga' }
+  ];
+  
   const [league, setLeague] = useState('');
   const [season, setSeason] = useState('2026-2027');
   const [msg, setMsg] = useState('');
   const [progress, setProgress] = useState<string>('');
   
-  useEffect(() => { api.get('/leagues').then(setLeagues); }, []);
+  // Eliminamos el useEffect que consultaba la API
   
   const run = (url: string, desc: string) => { 
     if (!league) return alert("Por favor selecciona una liga primero.");
