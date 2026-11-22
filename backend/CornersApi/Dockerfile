@@ -1,6 +1,6 @@
 # Usamos la imagen oficial de Playwright para .NET (versión 1.64.1 según tu csproj)
 # Si la imagen de la versión exacta falla, puedes usar v1.40.0-jammy
-FROM mcr.microsoft.com/playwright/dotnet:v1.64.1-jammy
+FROM mcr.microsoft.com/playwright/dotnet:v1.64.1-noble
 
 WORKDIR /app
 
