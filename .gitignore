@@ -1,0 +1,17 @@
+# Backend .NET
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+.vs/
+
+# Frontend React/Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Entornos y configuraciones locales
+.env
+appsettings.Development.json

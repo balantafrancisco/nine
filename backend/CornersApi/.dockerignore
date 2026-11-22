@@ -1,0 +1,4 @@
+bin/
+obj/
+corners.db
+*.db
