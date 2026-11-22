@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5080/api';
+// Escribimos la URL de Render directamente
+const API_BASE = 'https://nine-backend-fsy8.onrender.com/api';
 
 const json = async (r: Response) => {
   if (!r.ok) throw new Error(await r.text());
