@@ -6,13 +6,14 @@ RUN dotnet restore "CornersApi.csproj"
 COPY . .
 RUN dotnet publish "CornersApi.csproj" -c Release -o /app/publish
 
-# 2. Etapa final: Imagen de Playwright 1.64.1 basada en Ubuntu 22.04 (Jammy) que incluye .NET 8
-FROM mcr.microsoft.com/playwright/dotnet:v1.64.1-jammy AS final
+# 2. Etapa final: Usamos la imagen SDK de .NET 8 para tener PowerShell y el runtime
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# 3. CLAVE: Decirle a Playwright dónde están los navegadores preinstalados en esta imagen
+# 3. Instalar dependencias de Playwright y el navegador Chromium
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN pwsh playwright.ps1 install --with-deps chromium
 
 # 4. Configuración del puerto para Render
 ENV ASPNETCORE_URLS=http://+:10000
